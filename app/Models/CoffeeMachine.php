@@ -12,6 +12,6 @@ class CoffeeMachine
     public static function makeTea(int $amount): string
     {
 
-        return "im not a tea pot";
+        return "$amount ml of tea";
     }
 }

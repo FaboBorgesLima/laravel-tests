@@ -2,16 +2,47 @@
 
 namespace App\Models;
 
+use function Laravel\Prompts\error;
+
 class CoffeeMachine
 {
-    public static function makeCoffee(int $amount): string
-    {
+    private int $max_volume = 0;
+    private int $coffee = 0;
 
-        return "$amount ml of coffee";
+    public function __construct(int $max_volume = 0)
+    {
+        $this->max_volume = $max_volume;
     }
-    public static function makeTea(int $amount): string
+
+    public function makeCoffee(int $amount): bool
     {
 
-        return "$amount ml of tea";
+        if ($this->coffee == $this->max_volume) {
+            return false;
+        }
+
+        $this->coffee += $amount;
+
+        if ($this->max_volume < $this->coffee) {
+            $this->coffee = $this->max_volume;
+        }
+
+        return true;
+    }
+
+    public function getCoffee(): int
+    {
+        return $this->coffee;
+    }
+
+    public function makeTea(int $amount): bool
+    {
+
+        return false;
+    }
+
+    public function getTea(): int
+    {
+        return 0;
     }
 }

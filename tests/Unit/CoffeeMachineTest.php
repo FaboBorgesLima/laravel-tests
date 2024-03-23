@@ -7,10 +7,33 @@ class CoffeeMachineTest extends TestCase
 {
     public function testMakeCoffee(): void
     {
-        $this->assertSame("100 ml of coffee", CoffeeMachine::makeCoffee(100));
+
+        $machine = new CoffeeMachine(1000);
+
+        $this->assertTrue($machine->makeCoffee(500));
+    }
+    public function testGetCoffee(): void
+    {
+
+        $machine = new CoffeeMachine(1000);
+
+        $machine->makeCoffee(500);
+
+        $this->assertEquals(500, $machine->getCoffee());
     }
     public function testMakeTea(): void
     {
-        $this->assertSame("im not a tea pot", CoffeeMachine::makeTea(100), "im a coffee machine");
+
+        $machine = new CoffeeMachine(1000);
+
+        $this->assertFalse($machine->makeTea(100));
+    }
+    public function testGetTea(): void
+    {
+        $machine = new CoffeeMachine(1000);
+
+        $machine->makeTea(100);
+
+        $this->assertEquals(0, $machine->getTea());
     }
 }
